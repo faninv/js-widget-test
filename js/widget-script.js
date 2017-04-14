@@ -35,6 +35,16 @@ function scriptLoadHandler() {
     main(); 
 }
 
+
+function getSyncScriptParams() {
+	var scripts = document.getElementsByTagName('script');
+	var lastScript = scripts[scripts.length-1];
+	var scriptName = lastScript;
+	return {
+		className : scriptName.getAttribute('data-class-name')
+	};
+ }
+
 /******** Our main function ********/
 function main() { 
     jQuery(document).ready(function($) { 
@@ -49,7 +59,15 @@ function main() {
         /******* Load HTML *******/
         var jsonp_url = "http://93.170.169.173/widget-test/widget-data.php?callback=?";
         $.getJSON(jsonp_url, function(data) {
-          $('#widget-container').html("Widget data: title = " + data.title + ", description = " + data.description);
+			var container = $('#widget-container');
+			var containerClass = 'fw-widget-container';
+
+			if(typeof(getSyncScriptParams()) === "object" && typeof(getSyncScriptParams().className) === "string" && getSyncScriptParams().className !== "")
+				containerClass = containerClass + ' ' + getSyncScriptParams().className;
+			else 
+				containerClass = containerClass + ' fw-widget-default';
+
+			container.addClass(containerClass).html("Widget data: title = " + data.title + ", description = " + data.description);
         });
     });
 }
