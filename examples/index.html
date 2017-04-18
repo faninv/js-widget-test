@@ -6,6 +6,28 @@
 </head>
 <body>
 	<div id="widget-container"></div>
+    <div id="widget-container2"></div>
+
+    <script type="text/javascript" src="https://code.jquery.com/jquery-2.2.4.min.js"></script>
+    <script type="text/javascript" src="https://code.jquery.com/ui/1.12.1/jquery-ui.min.js"></script>
 	<script src="http://93.170.169.173/widget-test/js/widget-script.js"></script>
+    <script>
+        $(function() {
+            $("#widget-container").modernWidget({
+                width: '400px',
+                height: '300px',
+                backgroundColor: '#6f5499',
+                fontSize: '24px',
+                fontColor: '#ececec'
+            });
+            $("#widget-container2").modernWidget({
+                width: '200px',
+                height: '150px',
+                backgroundColor: '#eee',
+                fontSize: '20px',
+                fontColor: '#6f5499'
+            });
+        });
+    </script>
 </body>
 </html>
